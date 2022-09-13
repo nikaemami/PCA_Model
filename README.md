@@ -11,7 +11,12 @@ First, I read the data into **pandas dataframe** and seperate the training set.
 
 Then I calculate the mean of each column (feature), and subtract it from the dataset so that the dataset is **centered on the origin**.
 
-Moreover, I calculate the **covariance matrix** of the mean-centered data, and compute the **eigenvalues** and **eigenvectors** for the calculated matrix.
+Moreover, I calculate the **covariance matrix** of the mean-centered data, and compute the **eigenvalues** and **eigenvectors** for the calculated matrix, using NumPy as below:
+
+```ruby
+cov = np.cov(images_mean_centered, rowvar = False)
+eigenvalues, eigenvectors = np.linalg.eig(cov)
+```
 
 Finally I sort the eigenvalues in the descending order along with their corresponding eigenvector.
 
@@ -25,7 +30,11 @@ The eigenvectors and eigenvalues of a covariance matrix represent the **â€œcoreâ
 
 <h4> &nbsp;Step 4:</h4>
 
-Now I implemenet the **KNN** algorithm on the dataset.
+Now I implemenet the **KNN** algorithm on the dataset, using sklearn library as below:
+
+```ruby
+knn = KNeighborsClassifier(n_neighbors=1)
+```
 
 First I normalize the data using **np.linalg.norm**. Then I implemenet the same algorithm for the reduced data.
 
@@ -59,6 +68,12 @@ CCR for k = 2, reduced data: 0.3028698801894678
 
 As it can be seen from the above results, when we use the initial data, the program takes so much to run, but according to the confusion matrix and the accuracy score, the results are more accurate. However, when using pca, the program becomes much faster, but the accuracy is a little bit lower.
 
-In the final step of this project, I implemented PCA with **different number of components**, and tested the accuracy of the different KNN models. The results is as follows:
+In the final step of this project, I implemented PCA with **different number of components**, and tested the accuracy of the different KNN models, using sklearn:
+
+```ruby
+from sklearn.metrics import accuracy_score
+```
+
+The result is as follows:
 
 ![My Image](images/5.png)
